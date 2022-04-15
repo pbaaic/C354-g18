@@ -30,62 +30,137 @@ public class CycleApp extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
+        mapview_button_group = new javax.swing.ButtonGroup();
+        main_panel = new javax.swing.JPanel();
+        title_label = new javax.swing.JLabel();
         map_panel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        rideLabel = new javax.swing.JLabel();
-        intervalLabel = new javax.swing.JLabel();
+        ride_pane = new javax.swing.JScrollPane();
+        ride_list = new javax.swing.JList<>();
+        ride_label = new javax.swing.JLabel();
+        splitinterval_label = new javax.swing.JLabel();
+        split_interval = new javax.swing.JComboBox<>();
+        cyclosm_button = new javax.swing.JToggleButton();
+        streetview_button = new javax.swing.JToggleButton();
+        satellite_button = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(225, 239, 253));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        main_panel.setBackground(new java.awt.Color(225, 239, 253));
+        main_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(0, 153, 255));
-        titleLabel.setText("Cycle App");
-        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        title_label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        title_label.setForeground(new java.awt.Color(0, 153, 255));
+        title_label.setText("Cycle App");
+        main_panel.add(title_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         map_panel.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(map_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 360, 390));
+        main_panel.add(map_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 360, 380));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        ride_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Workout 2021-06-06", "Workout 2021-06-18", "Workout 2021-07-10", "Workout 2021-07-17" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        ride_pane.setViewportView(ride_list);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 110));
+        main_panel.add(ride_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 130));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 km", "5 km", "10 km", "15 km" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ride_label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ride_label.setText("Ride List");
+        main_panel.add(ride_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        splitinterval_label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        splitinterval_label.setText("Split Interval:");
+        main_panel.add(splitinterval_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
+
+        split_interval.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 km", "5 km", "10 km", "15 km" }));
+        split_interval.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                split_intervalActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 60, -1));
+        main_panel.add(split_interval, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 90, -1));
 
-        rideLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        rideLabel.setText("Ride List");
-        jPanel1.add(rideLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        mapview_button_group.add(cyclosm_button);
+        cyclosm_button.setText("CyclOSM View");
+        cyclosm_button.setFocusPainted(false);
+        cyclosm_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cyclosm_buttonActionPerformed(evt);
+            }
+        });
+        main_panel.add(cyclosm_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
 
-        intervalLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        intervalLabel.setText("Select split interval:");
-        jPanel1.add(intervalLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
+        mapview_button_group.add(streetview_button);
+        streetview_button.setText("Street View");
+        streetview_button.setFocusPainted(false);
+        streetview_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                streetview_buttonActionPerformed(evt);
+            }
+        });
+        main_panel.add(streetview_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 640));
+        mapview_button_group.add(satellite_button);
+        satellite_button.setText("Satellite View");
+        satellite_button.setFocusPainted(false);
+        satellite_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                satellite_buttonActionPerformed(evt);
+            }
+        });
+        main_panel.add(satellite_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
+
+        getContentPane().add(main_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 640));
 
         setBounds(0, 0, 372, 646);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void split_intervalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_split_intervalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_split_intervalActionPerformed
+    CharSequence street = "&amp;distance";
+    CharSequence satellite = "&amp;source=satellite";
+    CharSequence cosm = "&amp;source=cosm";
+    String replace = "";
+    private void cyclosm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cyclosm_buttonActionPerformed
+        int current = ride_list.getSelectedIndex();
+        if (browser.getHTML().contains(satellite)) {
+            replace = browser.getHTML().replace(satellite, cosm);
+        } else if (browser.getHTML().contains(street)) {
+            replace = browser.getHTML().replace(street, cosm);
+        }
+        browser.loadHTML(replace);
+        mapview_button_group.clearSelection();
+    }//GEN-LAST:event_cyclosm_buttonActionPerformed
+
+    private void streetview_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_streetview_buttonActionPerformed
+        int current = ride_list.getSelectedIndex();
+        if (browser.getHTML().contains(satellite)) {
+            replace = browser.getHTML().replace(satellite, street);
+        } else if (browser.getHTML().contains(cosm)) {
+            replace = browser.getHTML().replace(cosm, street);
+        }
+        browser.loadHTML(replace);
+        mapview_button_group.clearSelection();
+    }//GEN-LAST:event_streetview_buttonActionPerformed
+
+    private void satellite_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_satellite_buttonActionPerformed
+        //System.out.print(browser.getHTML());
+        int current = ride_list.getSelectedIndex();
+        //System.out.print(current);
+        if (browser.getHTML().contains(street)) {
+            replace = browser.getHTML().replace(street, satellite);
+        } else if (browser.getHTML().contains(cosm)) {
+            replace = browser.getHTML().replace(cosm, satellite);
+        }
+        browser.loadHTML(replace);
+        mapview_button_group.clearSelection();
+        //System.out.print(current);
+        //System.out.println("");
+        //System.out.print(browser.getHTML());
+    }//GEN-LAST:event_satellite_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,14 +198,18 @@ public class CycleApp extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel intervalLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton cyclosm_button;
+    private javax.swing.JPanel main_panel;
     private javax.swing.JPanel map_panel;
-    private javax.swing.JLabel rideLabel;
-    private javax.swing.JLabel titleLabel;
+    private javax.swing.ButtonGroup mapview_button_group;
+    private javax.swing.JLabel ride_label;
+    private javax.swing.JList<String> ride_list;
+    private javax.swing.JScrollPane ride_pane;
+    private javax.swing.JToggleButton satellite_button;
+    private javax.swing.JComboBox<String> split_interval;
+    private javax.swing.JLabel splitinterval_label;
+    private javax.swing.JToggleButton streetview_button;
+    private javax.swing.JLabel title_label;
     // End of variables declaration//GEN-END:variables
 
     Browser browser;
@@ -160,11 +239,11 @@ public class CycleApp extends JFrame {
         });
         browser.loadURL("C:\\HTMLGmaps\\simple_map.html");
 
-        jList1.addMouseListener(new MouseAdapter() {
+        ride_list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {
-                    int index = jList1.locationToIndex(evt.getPoint());
+                    int index = ride_list.locationToIndex(evt.getPoint());
                     switch (index) {
                         case 0:
                             browser.loadHTML("<iframe src=\"https://gpx.studio/?state=%7B%22ids%22:%5B%221ETBK7UyreipM5Gr7TtFb0cg4nap2O_Fu%22%5D%7D&embed&token=pk.eyJ1IjoiYzM1NGdwIiwiYSI6ImNsMTkzdzFvMDR5OTUzYnBrOG1lOG84ODkifQ.5z_eVrxohLKmHzXqaZAxdw&running&distance&direction\" width=\"100%\" height=\"500\" frameborder=\"0\" allowfullscreen><p><a href=\"https://gpx.studio/?state=%7B%22ids%22:%5B%221ETBK7UyreipM5Gr7TtFb0cg4nap2O_Fu%22%5D%7D></a></p></iframe>");
