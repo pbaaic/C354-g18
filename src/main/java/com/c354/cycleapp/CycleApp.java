@@ -58,7 +58,7 @@ public class CycleApp extends JFrame {
         main_panel.add(map_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 360, 380));
 
         ride_list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Workout 2021-06-06", "Workout 2021-06-18", "Workout 2021-07-10", "Workout 2021-07-17" };
+            String[] strings = { "Workout 2021-06-06", "Workout 2021-06-18", "Workout 2021-07-10", "Workout 2021-07-17", "G16 Integration Test" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -75,6 +75,7 @@ public class CycleApp extends JFrame {
         main_panel.add(splitinterval_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
 
         split_interval.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 km", "5 km", "10 km", "15 km" }));
+        split_interval.setFocusable(false);
         split_interval.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 split_intervalActionPerformed(evt);
@@ -257,6 +258,8 @@ public class CycleApp extends JFrame {
                         case 3:
                             browser.loadHTML("<iframe src=\"https://gpx.studio/?state=%7B%22ids%22:%5B%221LbMiqc5WxSGvDOiMMA-s2Ar5JzYCBH_V%22%5D%7D&embed&token=pk.eyJ1IjoiYzM1NGdwIiwiYSI6ImNsMTkzdzFvMDR5OTUzYnBrOG1lOG84ODkifQ.5z_eVrxohLKmHzXqaZAxdw&running&distance&direction\" width=\"100%\" height=\"500\" frameborder=\"0\" allowfullscreen><p><a href=\"https://gpx.studio/?state=%7B%22ids%22:%5B%221LbMiqc5WxSGvDOiMMA-s2Ar5JzYCBH_V%22%5D%7D></a></p></iframe>");
                             break;
+                        case 4:
+                            browser.loadHTML("<iframe src=\"https://gpx.studio/?state=%7B%22ids%22:%5B%2210IbXh7W7QDO7ZKmapJYdcgN3vhdN2Q-e%22%5D%7D&embed&token=pk.eyJ1IjoiYzM1NGdwIiwiYSI6ImNsMTkzdzFvMDR5OTUzYnBrOG1lOG84ODkifQ.5z_eVrxohLKmHzXqaZAxdw&distance\" width=\"100%\" height=\"500\" frameborder=\"0\" allowfullscreen><p><a href=\"https://gpx.studio/?state=%7B%22ids%22:%5B%2210IbXh7W7QDO7ZKmapJYdcgN3vhdN2Q-e%22%5D%7D></a></p></iframe>");
                         default:
                             break;
                     }
