@@ -57,7 +57,7 @@ public class CycleApp extends JFrame {
         main_panel.add(map_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 360, 380));
 
         ride_list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Workout 2021-06-06", "Workout 2021-06-18", "Workout 2021-07-10", "Workout 2021-07-17", "G16 Integration Test" };
+            String[] strings = { "Workout 2021-06-06", "Workout 2021-06-18", "Workout 2021-07-10", "Workout 2021-07-17", "Integration Test" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
