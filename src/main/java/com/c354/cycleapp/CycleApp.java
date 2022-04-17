@@ -12,7 +12,6 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
-import javax.swing.JList;
 
 public class CycleApp extends JFrame {
 
@@ -41,6 +40,7 @@ public class CycleApp extends JFrame {
         cyclosm_button = new javax.swing.JToggleButton();
         streetview_button = new javax.swing.JToggleButton();
         satellite_button = new javax.swing.JToggleButton();
+        reset_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -112,6 +112,14 @@ public class CycleApp extends JFrame {
         });
         main_panel.add(satellite_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
 
+        reset_button.setText("Reset");
+        reset_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_buttonActionPerformed(evt);
+            }
+        });
+        main_panel.add(reset_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+
         getContentPane().add(main_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 640));
 
         setBounds(0, 0, 372, 646);
@@ -120,12 +128,14 @@ public class CycleApp extends JFrame {
     private void split_intervalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_split_intervalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_split_intervalActionPerformed
-    CharSequence street = "&amp;distance";
-    CharSequence satellite = "&amp;source=satellite";
-    CharSequence cosm = "&amp;source=cosm";
+    transient CharSequence street = "&amp;distance";
+    transient CharSequence satellite = "&amp;source=satellite";
+    transient CharSequence cosm = "&amp;source=cosm";
+    String simple_map = "C:\\HTMLGmaps\\simple_map.html";
+    String sat_map = "C:\\HTMLGmaps\\sat_map.html";
     String replace = "";
     private void cyclosm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cyclosm_buttonActionPerformed
-        int current = ride_list.getSelectedIndex();
+        //int current = ride_list.getSelectedIndex();
         if (browser.getHTML().contains(satellite)) {
             replace = browser.getHTML().replace(satellite, cosm);
         } else if (browser.getHTML().contains(street)) {
@@ -136,7 +146,10 @@ public class CycleApp extends JFrame {
     }//GEN-LAST:event_cyclosm_buttonActionPerformed
 
     private void streetview_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_streetview_buttonActionPerformed
-        int current = ride_list.getSelectedIndex();
+        if (browser.getHTML().contains("mapbox://styles/mapbox/satellite-v9")) {
+            browser.loadURL(simple_map);
+        }
+        //int current = ride_list.getSelectedIndex();
         if (browser.getHTML().contains(satellite)) {
             replace = browser.getHTML().replace(satellite, street);
         } else if (browser.getHTML().contains(cosm)) {
@@ -147,9 +160,10 @@ public class CycleApp extends JFrame {
     }//GEN-LAST:event_streetview_buttonActionPerformed
 
     private void satellite_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_satellite_buttonActionPerformed
-        //System.out.print(browser.getHTML());
-        int current = ride_list.getSelectedIndex();
-        //System.out.print(current);
+        if (browser.getHTML().contains("mapbox://styles/mapbox/streets-v11")) {
+            browser.loadURL(sat_map);
+        }
+        //int current = ride_list.getSelectedIndex();
         if (browser.getHTML().contains(street)) {
             replace = browser.getHTML().replace(street, satellite);
         } else if (browser.getHTML().contains(cosm)) {
@@ -157,15 +171,22 @@ public class CycleApp extends JFrame {
         }
         browser.loadHTML(replace);
         mapview_button_group.clearSelection();
-        //System.out.print(current);
-        //System.out.println("");
-        //System.out.print(browser.getHTML());
     }//GEN-LAST:event_satellite_buttonActionPerformed
+
+    private void reset_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_buttonActionPerformed
+        if (browser.getHTML().contains("mapbox://styles/mapbox/streets-v11")) {
+        } else if (browser.getHTML().contains("mapbox://styles/mapbox/satellite-v9")) {
+        } else {
+            browser.loadURL(simple_map);
+        }
+        mapview_button_group.clearSelection();
+        ride_list.clearSelection();
+    }//GEN-LAST:event_reset_buttonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -178,22 +199,16 @@ public class CycleApp extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CycleApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CycleApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CycleApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CycleApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
+        //</editor-fold>
+
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CycleApp().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new CycleApp().setVisible(true);
         });
     }
 
@@ -202,6 +217,7 @@ public class CycleApp extends JFrame {
     private javax.swing.JPanel main_panel;
     private javax.swing.JPanel map_panel;
     private javax.swing.ButtonGroup mapview_button_group;
+    private javax.swing.JButton reset_button;
     private javax.swing.JLabel ride_label;
     private javax.swing.JList<String> ride_list;
     private javax.swing.JScrollPane ride_pane;
@@ -212,7 +228,7 @@ public class CycleApp extends JFrame {
     private javax.swing.JLabel title_label;
     // End of variables declaration//GEN-END:variables
 
-    Browser browser;
+    public transient Browser browser;
     BrowserView view;
 
     private void open_site() {
@@ -235,13 +251,12 @@ public class CycleApp extends JFrame {
             public void onFinishLoadingFrame(FinishLoadingEvent evt) {
                 evt.getBrowser().setZoomLevel(-2);
             }
-        ;
         });
-        browser.loadURL("C:\\HTMLGmaps\\simple_map.html");
+        browser.loadURL(simple_map);
 
         ride_list.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent evt) {
-                JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     int index = ride_list.locationToIndex(evt.getPoint());
                     switch (index) {
@@ -259,6 +274,7 @@ public class CycleApp extends JFrame {
                             break;
                         case 4:
                             browser.loadHTML("<iframe src=\"https://gpx.studio/?state=%7B%22ids%22:%5B%2210IbXh7W7QDO7ZKmapJYdcgN3vhdN2Q-e%22%5D%7D&embed&token=pk.eyJ1IjoiYzM1NGdwIiwiYSI6ImNsMTkzdzFvMDR5OTUzYnBrOG1lOG84ODkifQ.5z_eVrxohLKmHzXqaZAxdw&distance\" width=\"100%\" height=\"500\" frameborder=\"0\" allowfullscreen><p><a href=\"https://gpx.studio/?state=%7B%22ids%22:%5B%2210IbXh7W7QDO7ZKmapJYdcgN3vhdN2Q-e%22%5D%7D></a></p></iframe>");
+                            break;
                         default:
                             break;
                     }
